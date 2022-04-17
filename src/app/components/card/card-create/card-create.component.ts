@@ -11,13 +11,13 @@ import { Card } from '../card.model';
 export class CardCreateComponent implements OnInit {
 
   card: Card = {
-    nome: "Carta de Teste",
-    elemento: "Terra",
-    tipo: "Personagem",
-    poderFogo: 4,
-    poderAgua: 4,
-    poderTerra: 4,
-    poderAr: 4
+    nome: "",
+    elemento: "",
+    tipo: "",
+    poderFogo: 0,
+    poderAgua: 0,
+    poderTerra: 0,
+    poderAr: 0
   }
 
   constructor(

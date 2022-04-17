@@ -26,4 +26,18 @@ export class CardService {
   create(card: Card): Observable<Card> {
     return this.httpRequest.post<Card>(this.baseUrl, card)
   }
+
+  read(): Observable<Card[]> {
+    return this.httpRequest.get<Card[]>(this.baseUrl)
+  }
+
+  readById(id: string): Observable<Card> {
+    const url = `${this.baseUrl}/${id}`
+    return this.httpRequest.get<Card>(url)
+  }
+
+  update(card: Card): Observable<Card> {
+    const url = `${this.baseUrl}/${card.id}`
+    return this.httpRequest.put<Card>(url, card)
+  }
 }
