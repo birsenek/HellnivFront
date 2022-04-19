@@ -3,49 +3,28 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { Card } from '../card.model';
+import { CardService } from '../card.service';
 
-// TODO: Replace this with your own data model type
-export interface CardReadTemplateItem {
-  name: string;
-  id: number;
-}
 
 // TODO: replace this with real data from your application
-const EXAMPLE_DATA: CardReadTemplateItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
-];
+const dataSource: Card[] = [];
 
 /**
  * Data source for the CardReadTemplate view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class CardReadTemplateDataSource extends DataSource<CardReadTemplateItem> {
-  data: CardReadTemplateItem[] = EXAMPLE_DATA;
+export class CardReadTemplateDataSource extends DataSource<Card> {
+  data: Card[] = dataSource;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor() {
+  constructor(private cardService: CardService) {
     super();
+    this.cardService.read().subscribe(data => {
+      this.data = data
+    })
   }
 
   /**
@@ -53,7 +32,7 @@ export class CardReadTemplateDataSource extends DataSource<CardReadTemplateItem>
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<CardReadTemplateItem[]> {
+  connect(): Observable<Card[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
@@ -76,7 +55,7 @@ export class CardReadTemplateDataSource extends DataSource<CardReadTemplateItem>
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: CardReadTemplateItem[]): CardReadTemplateItem[] {
+  private getPagedData(data: Card[]): Card[] {
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -89,7 +68,7 @@ export class CardReadTemplateDataSource extends DataSource<CardReadTemplateItem>
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: CardReadTemplateItem[]): CardReadTemplateItem[] {
+  private getSortedData(data: Card[]): Card[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -97,8 +76,14 @@ export class CardReadTemplateDataSource extends DataSource<CardReadTemplateItem>
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
+        case 'name': return compare(a.nome, b.nome, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'elemento': return compare(+a.elemento, +b.elemento, isAsc);
+        case 'tipo': return compare(+a.tipo, +b.tipo, isAsc);
+        case 'poderFogo': return compare(+a.poderFogo, +b.poderFogo, isAsc);
+        case 'poderAgua': return compare(+a.poderAgua, +b.poderAgua, isAsc);
+        case 'poderTerra': return compare(+a.poderTerra, +b.poderTerra, isAsc);
+        case 'poderAr': return compare(+a.poderAr, +b.poderAr, isAsc);
         default: return 0;
       }
     });

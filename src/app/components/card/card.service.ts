@@ -1,3 +1,4 @@
+import { ObserversModule } from '@angular/cdk/observers';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -40,4 +41,10 @@ export class CardService {
     const url = `${this.baseUrl}/${card.id}`
     return this.httpRequest.put<Card>(url, card)
   }
+
+  delete(cardId: number): Observable<Card> {
+    const url = `${this.baseUrl}/${cardId}`
+    return this.httpRequest.delete<Card>(url)
+  }
+
 }

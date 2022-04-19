@@ -7,6 +7,7 @@ import { HomeComponent } from './views/home/home.component';
 import { CardCrudComponent } from './views/card-crud/card-crud.component';
 import { CardCreateComponent } from './components/card/card-create/card-create.component';
 import { CardUpdateComponent } from './components/card/card-update/card-update.component';
+import { CardDeleteComponent } from './components/card/card-delete/card-delete.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path:"cards/update/:id",
     component: CardUpdateComponent
+  },
+  {
+    path:"cards/delete/:id",
+    component: CardDeleteComponent
   }
 ];
 

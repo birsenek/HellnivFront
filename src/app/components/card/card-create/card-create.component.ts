@@ -11,6 +11,7 @@ import { Card } from '../card.model';
 export class CardCreateComponent implements OnInit {
 
   card: Card = {
+    id: 0,
     nome: "",
     elemento: "",
     tipo: "",

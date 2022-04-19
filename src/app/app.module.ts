@@ -32,6 +32,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { CardUpdateComponent } from './components/card/card-update/card-update.component';
+import { CardDeleteComponent } from './components/card/card-delete/card-delete.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { CardUpdateComponent } from './components/card/card-update/card-update.c
     CardCreateComponent,
     CardReadComponent,
     CardReadTemplateComponent,
-    CardUpdateComponent
+    CardUpdateComponent,
+    CardDeleteComponent
   ],
   imports: [
     BrowserModule,

@@ -1,22 +1,21 @@
-import { Card } from './../card.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Card } from '../card.model';
 import { CardService } from '../card.service';
 
 @Component({
-  selector: 'Helniv-card-update',
-  templateUrl: './card-update.component.html',
-  styleUrls: ['./card-update.component.css']
+  selector: 'Helniv-card-delete',
+  templateUrl: './card-delete.component.html',
+  styleUrls: ['./card-delete.component.css']
 })
-export class CardUpdateComponent implements OnInit {
-  
+export class CardDeleteComponent implements OnInit {
   card: Card;
 
   constructor(
     private cardService: CardService,
     private router: Router,
     private route: ActivatedRoute
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -26,9 +25,9 @@ export class CardUpdateComponent implements OnInit {
     });
   }
 
-  updateCard(): void {
-    this.cardService.update(this.card).subscribe(() => {
-      this.cardService.showMessage('Carta atualizada com sucesso');
+  deleteCard(): void {
+    this.cardService.delete(this.card.id).subscribe(() => {
+      this.cardService.showMessage('Carta excluída com sucesso');
       this.router.navigate(["/cards"]);
     })
   }
