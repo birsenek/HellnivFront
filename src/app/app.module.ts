@@ -26,7 +26,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { CardReadComponent } from './components/card/card-read/card-read.component';
 import { CardReadTemplateComponent } from './components/card/card-read-template/card-read-template.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -44,7 +43,6 @@ import { CardDeleteComponent } from './components/card/card-delete/card-delete.c
     HomeComponent,
     CardCrudComponent,
     CardCreateComponent,
-    CardReadComponent,
     CardReadTemplateComponent,
     CardUpdateComponent,
     CardDeleteComponent
