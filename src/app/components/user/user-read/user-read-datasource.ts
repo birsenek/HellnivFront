@@ -1,27 +1,28 @@
+import { UserService } from './../user.service';
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { Card } from '../card.model';
-import { CardService } from '../card.service';
+import { User } from '../user.model';
 
-const dataSource: Card[] = [];
+const dataSource: User[] = [];
 
 /**
- * Data source for the CardReadTemplate view. This class should
+ * Data source for the UserRead view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
  * (including sorting, pagination, and filtering).
  */
-export class CardReadTemplateDataSource extends DataSource<Card> {
-  data: Card[] = dataSource;
+export class UserReadDataSource extends DataSource<User> {
+  data: User[] = dataSource;
   paginator: MatPaginator | undefined;
   sort: MatSort | undefined;
 
-  constructor(private cardService: CardService) {
+  constructor(private userService: UserService) {
     super();
-    this.cardService.read().subscribe(data => {
+    this.userService.getAll().subscribe(data => {
       this.data = data
+      console.log(data)
     })
   }
 
@@ -30,7 +31,7 @@ export class CardReadTemplateDataSource extends DataSource<Card> {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
-  connect(): Observable<Card[]> {
+  connect(): Observable<User[]> {
     if (this.paginator && this.sort) {
       // Combine everything that affects the rendered data into one update
       // stream for the data-table to consume.
@@ -53,7 +54,7 @@ export class CardReadTemplateDataSource extends DataSource<Card> {
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getPagedData(data: Card[]): Card[] {
+  private getPagedData(data: User[]): User[] {
     if (this.paginator) {
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -66,7 +67,7 @@ export class CardReadTemplateDataSource extends DataSource<Card> {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
-  private getSortedData(data: Card[]): Card[] {
+  private getSortedData(data: User[]): User[] {
     if (!this.sort || !this.sort.active || this.sort.direction === '') {
       return data;
     }
@@ -74,14 +75,8 @@ export class CardReadTemplateDataSource extends DataSource<Card> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.nome, b.nome, isAsc);
+        case 'name': return compare(a.name, b.name, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
-        case 'elemento': return compare(+a.elemento, +b.elemento, isAsc);
-        case 'tipo': return compare(+a.tipo, +b.tipo, isAsc);
-        case 'poderFogo': return compare(+a.poderFogo, +b.poderFogo, isAsc);
-        case 'poderAgua': return compare(+a.poderAgua, +b.poderAgua, isAsc);
-        case 'poderTerra': return compare(+a.poderTerra, +b.poderTerra, isAsc);
-        case 'poderAr': return compare(+a.poderAr, +b.poderAr, isAsc);
         default: return 0;
       }
     });

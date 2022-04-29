@@ -8,6 +8,7 @@ import { CardCrudComponent } from './views/card-crud/card-crud.component';
 import { CardCreateComponent } from './components/card/card-create/card-create.component';
 import { CardUpdateComponent } from './components/card/card-update/card-update.component';
 import { CardDeleteComponent } from './components/card/card-delete/card-delete.component';
+import { UserCrudComponent } from './views/user-crud/user-crud.component';
 
 const routes: Routes = [
   {
@@ -29,7 +30,11 @@ const routes: Routes = [
   {
     path:"cards/delete/:id",
     component: CardDeleteComponent
-  }
+  },
+  {
+    path: "users",
+    component: UserCrudComponent
+  },
 ];
 
 @NgModule({
