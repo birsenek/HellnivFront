@@ -22,7 +22,18 @@ export class UserReadDataSource extends DataSource<User> {
     super();
     this.userService.getAll().subscribe(data => {
       this.data = data
-      console.log(data)
+
+      this.data.forEach(a => {
+        if (a.ativo == "1") {
+          a.ativo = "Sim";
+        }
+        else
+        {
+          a.ativo = "Não";
+        }
+      });
+      
+      return this.data;
     })
   }
 
@@ -76,7 +87,9 @@ export class UserReadDataSource extends DataSource<User> {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
         case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'login' : return compare(a.login, b.login, isAsc);
+        case 'email' : return compare(a.email, b.email, isAsc);
+        case 'ativo' : return compare(a.ativo, b.ativo, isAsc);
         default: return 0;
       }
     });
@@ -87,3 +100,5 @@ export class UserReadDataSource extends DataSource<User> {
 function compare(a: string | number, b: string | number, isAsc: boolean): number {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
+
+

@@ -16,9 +16,10 @@ export class UserReadComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) table!: MatTable<User>;
   dataSource: UserReadDataSource;
+  
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'login', 'email', 'ativo'];
+  displayedColumns = ['rowNumber', 'name', 'login', 'email', 'ativo'];
 
   constructor(private userService: UserService) {
     this.dataSource = new UserReadDataSource(userService);
