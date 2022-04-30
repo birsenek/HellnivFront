@@ -31,7 +31,7 @@ export class CardCreateComponent implements OnInit {
 
   createCard(): void {
     this.cardService.create(this.card).subscribe(() => {
-      this.cardService.showMessage("Carda criada com sucesso!")
+      this.cardService.showMessage("Carta criada com sucesso!")
       this.router.navigate(['/cards'])
     })
   }

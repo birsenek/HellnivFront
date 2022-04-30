@@ -86,7 +86,7 @@ export class UserReadDataSource extends DataSource<User> {
     return data.sort((a, b) => {
       const isAsc = this.sort?.direction === 'asc';
       switch (this.sort?.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
+        case 'name': return compare(a.nome, b.nome, isAsc);
         case 'login' : return compare(a.login, b.login, isAsc);
         case 'email' : return compare(a.email, b.email, isAsc);
         case 'ativo' : return compare(a.ativo, b.ativo, isAsc);

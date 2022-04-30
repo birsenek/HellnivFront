@@ -77,7 +77,7 @@ export class CardReadTemplateDataSource extends DataSource<Card> {
         case 'name': return compare(a.nome, b.nome, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
         case 'elemento': return compare(+a.elemento, +b.elemento, isAsc);
-        case 'tipo': return compare(+a.tipo, +b.tipo, isAsc);
+        case 'tipo': return compare(a.tipo, b.tipo, isAsc);
         case 'poderFogo': return compare(+a.poderFogo, +b.poderFogo, isAsc);
         case 'poderAgua': return compare(+a.poderAgua, +b.poderAgua, isAsc);
         case 'poderTerra': return compare(+a.poderTerra, +b.poderTerra, isAsc);

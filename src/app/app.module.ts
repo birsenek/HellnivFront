@@ -34,6 +34,7 @@ import { CardUpdateComponent } from './components/card/card-update/card-update.c
 import { CardDeleteComponent } from './components/card/card-delete/card-delete.component';
 import { UserCrudComponent } from './views/user-crud/user-crud.component';
 import { UserReadComponent } from './components/user/user-read/user-read.component';
+import { UserCreateComponent } from './components/user/user-create/user-create.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { UserReadComponent } from './components/user/user-read/user-read.compone
     CardUpdateComponent,
     CardDeleteComponent,
     UserCrudComponent,
-    UserReadComponent
+    UserReadComponent,
+    UserCreateComponent
   ],
   imports: [
     BrowserModule,

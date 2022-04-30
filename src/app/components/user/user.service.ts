@@ -17,8 +17,21 @@ export class UserService {
         private httpRequest: HttpClient
     ) {}
 
+    showMessage(msg: string, isError: boolean = false): void {
+        this.snackBar.open(msg, 'X', {
+          duration: 3000,
+          horizontalPosition: "right",
+          verticalPosition: "bottom",
+          panelClass: isError? ['msg-error'] : ['msg-success']
+        })
+      }
+
     getAll(): Observable<User[]> {
-        return this.httpRequest.get<User[]>(this.baseUrl)
+        return this.httpRequest.get<User[]>(this.baseUrl);
+    }
+
+    createUser(user: User): Observable<User> {
+        return this.httpRequest.post<User>(this.baseUrl, user);
     }
 
 }
