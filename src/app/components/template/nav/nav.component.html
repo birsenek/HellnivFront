@@ -1,3 +1,4 @@
+
 <mat-sidenav-container class="container"> 
     <mat-sidenav class="sidenav" mode="side" opened fixedInViewport="true" fixedTopGap="64">
         <mat-nav-list class="nav-list">
@@ -7,18 +8,39 @@
                 </i>
                 Inicio
              </a>
-             <a mat-list-item routerLink="/cards">
-                <i class="material-icons">
-                    videogame_asset
-                </i>
-                Cartas
-             </a>
-             <a mat-list-item routerLink="/users">
-                <i class="material-icons">
-                     account_circle
-                </i>
-                Usuarios
-             </a>
+             <cdk-accordion class="example-accordion">
+                <cdk-accordion-item
+                  *ngFor="let item of items; let index = index;"
+                  #accordionItem="cdkAccordionItem"
+                  class="example-accordion-item"
+                  role="button"
+                  tabindex="0"
+                  [attr.id]="'accordion-header-' + index"
+                  [attr.aria-expanded]="accordionItem.expanded"
+                  [attr.aria-controls]="'accordion-body-' + index">
+                  <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                    <a mat-list-item >
+                        <i class="material-icons">
+                            {{ icons[index] }}
+                        </i>
+                    {{ item }}
+                    </a>
+                  </div>
+                  <div
+                    class="example-accordion-item-body"
+                    role="region"
+                    [style.display]="accordionItem.expanded ? '' : 'none'"
+                    [attr.id]="'accordion-body-' + index"
+                    [attr.aria-labelledby]="'accordion-header-' + index">
+                    <a mat-list-item routerLink="{{ listarRoutes[index] }}" class="nav-menu-item">
+                      <li>{{ listarItems[index] }}</li>
+                    </a>
+                    <a mat-list-item routerLink="{{ cadastrarRoutes[index] }}" class="nav-menu-item">
+                      <li>{{ cadastrarItems[index] }}</li>
+                    </a>
+                  </div>
+                </cdk-accordion-item>
+              </cdk-accordion>  
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content class="content">

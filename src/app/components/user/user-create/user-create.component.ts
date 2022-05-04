@@ -31,9 +31,7 @@ export class UserCreateComponent implements OnInit {
     this.userService.createUser(this.user).subscribe(() => {
       this.userService.showMessage("Usuário criado com sucesso!")
       this.router.navigate(['/users'])
-    }
-
-    )
+    });
   }
 
 }

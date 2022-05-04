@@ -2,6 +2,7 @@ import { CardService } from './../card.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Card } from '../card.model';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'Helniv-card-create',
@@ -18,8 +19,11 @@ export class CardCreateComponent implements OnInit {
     poderFogo: 0,
     poderAgua: 0,
     poderTerra: 0,
-    poderAr: 0
+    poderAr: 0,
+    local: ''
   }
+ 
+  file:File
 
   constructor(
     private cardService: CardService,
@@ -30,14 +34,35 @@ export class CardCreateComponent implements OnInit {
   }
 
   createCard(): void {
-    this.cardService.create(this.card).subscribe(() => {
+    this.cardService.create(this.card, this.file).subscribe(() => {
       this.cardService.showMessage("Carta criada com sucesso!")
       this.router.navigate(['/cards'])
     })
+    // this.cardService.uploadFile(this.file).subscribe(() => {})
   }
 
   cancelCard(): void {
     this.cardService.showMessage("Operação cancelada.")
     this.router.navigate(['/cards'])
   }
+
+  onFileSelected(event) {
+
+    this.file = event.target.files[0];
+
+    if (this.file) {
+
+        this.card.local = this.file.name;
+    }
+
+        //const formData = new FormData();
+
+        //formData.append("thumbnail", this.file);
+        //this.cardService.uploadFile(this.file).subscribe(() => {})
+        //this.cardService.uploadFile(file).subscribe(() => {})
+       //const upload$ = this.http.post("/api/thumbnail-upload", formData);
+
+    //     upload$.subscribe();
+    }
+
 }

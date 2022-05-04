@@ -7,6 +7,11 @@
     color: #ffffff;
 }
 
+.nav-menu-item {
+    color: #fff;
+    font-size: 0.9rem;
+}
+
 .sidenav i {
     padding-right: 10px;
 }

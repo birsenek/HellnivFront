@@ -24,6 +24,20 @@
         <mat-form-field>
             <input matInput placeholder = "Poder de Ar" [(ngModel)]="card.poderAr" name="poderAr">
         </mat-form-field>
+        <input type="file" class="file-input"
+            (change)="onFileSelected($event)" #fileUpload>
+
+            <div class="file-upload">
+
+            {{card.local || "Nenhum arquivo anexado."}}
+
+                <button mat-mini-fab color="primary" class="upload-btn"
+                (click)="fileUpload.click()">
+                <i class="material-icons">
+                    attach_file
+                </i>   
+                </button>
+            </div>
     </form>
 </mat-card>        
 <button mat-raised-button (click)="createCard()" color="primary">

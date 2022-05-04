@@ -7,4 +7,5 @@ export interface Card {
     poderAgua: number
     poderTerra: number
     poderAr: number
+    local: string
 }

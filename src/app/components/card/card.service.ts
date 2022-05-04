@@ -2,7 +2,7 @@ import { ObserversModule } from '@angular/cdk/observers';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
+import { fromEventPattern, Observable } from 'rxjs';
 import { Card } from './card.model';
 @Injectable({
   providedIn: 'root'
@@ -25,8 +25,18 @@ export class CardService {
     })
   }
 
-  create(card: Card): Observable<Card> {
-    return this.httpRequest.post<Card>(this.baseUrl, card)
+  create(card: Card, file: File): Observable<Card> {
+    const formData: FormData = new FormData();
+    formData.append('imageFile', file, file.name);
+    formData.append('nome', card.nome);
+    formData.append('elemento', card.elemento);
+    formData.append('tipo', card.tipo);
+    formData.append('poderFogo', card.poderFogo.toString());
+    formData.append('poderAgua', card.poderAgua.toString());
+    formData.append('poderAr', card.poderAr.toString());
+    formData.append('poderTerra', card.poderTerra.toString());
+    formData.append('local', card.local);
+    return this.httpRequest.post<Card>(this.baseUrl, formData)
   }
 
   read(): Observable<Card[]> {
@@ -47,5 +57,12 @@ export class CardService {
     const url = `${this.baseUrl}/${cardId}`
     return this.httpRequest.delete<Card>(url)
   }
+
+  // uploadFile(file: File) {
+  //   const formData: FormData = new FormData();
+  //   const url = `${this.baseUrl}/upload`
+  //   formData.append('fileKey', file, file.name);
+  //   return this.httpRequest.post(url, formData);
+  // }
 
 }
