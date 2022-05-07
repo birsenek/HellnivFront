@@ -4,26 +4,40 @@
     </mat-card-title>
     <form action="">
         <mat-form-field>
-            <input matInput placeholder = "Nome" [(ngModel)]="card.nome" name="nome">
+            <input matInput placeholder = "Nome" [ngModel]="card?.nome" name="nome">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder = "Elemento" [(ngModel)]="card.elemento" name="elemento">
+            <input matInput placeholder = "Elemento" [ngModel]="card?.elemento" name="elemento">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder = "Tipo" [(ngModel)]="card.tipo" name="tipo">
+            <input matInput placeholder = "Tipo" [ngModel]="card?.tipo" name="tipo">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder = "Poder de Fogo" [(ngModel)]="card.poderFogo" name="poderFogo">
+            <input matInput placeholder = "Poder de Fogo" [ngModel]="card?.poderFogo" name="poderFogo">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder = "Poder de Água" [(ngModel)]="card.poderAgua" name="poderAgua">
+            <input matInput placeholder = "Poder de Água" [ngModel]="card?.poderAgua" name="poderAgua">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder = "Poder de Terra" [(ngModel)]="card.poderTerra" name="poderTerra">
+            <input matInput placeholder = "Poder de Terra" [ngModel]="card?.poderTerra" name="poderTerra">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder = "Poder de Ar" [(ngModel)]="card.poderAr" name="poderAr">
+            <input matInput placeholder = "Poder de Ar" [ngModel]="card?.poderAr" name="poderAr">
         </mat-form-field>
+        <input type="file" class="file-input"
+            (change)="onFileSelected($event)" #fileUpload>
+
+            <div class="file-upload">
+
+            {{card?.local || "Nenhum arquivo anexado."}}
+
+                <button mat-mini-fab color="primary" class="upload-btn"
+                (click)="fileUpload.click()">
+                <i class="material-icons">
+                    attach_file
+                </i>   
+                </button>
+            </div>
     </form>
 </mat-card>        
 <button mat-raised-button (click)="updateCard()" color="primary">

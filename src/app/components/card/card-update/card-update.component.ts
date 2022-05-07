@@ -11,6 +11,7 @@ import { CardService } from '../card.service';
 export class CardUpdateComponent implements OnInit {
   
   card: Card;
+  file: File;
 
   constructor(
     private cardService: CardService,
@@ -27,7 +28,7 @@ export class CardUpdateComponent implements OnInit {
   }
 
   updateCard(): void {
-    this.cardService.update(this.card).subscribe(() => {
+    this.cardService.update(this.card, this.file).subscribe(() => {
       this.cardService.showMessage('Carta atualizada com sucesso');
       this.router.navigate(["/cards"]);
     })
@@ -35,6 +36,16 @@ export class CardUpdateComponent implements OnInit {
 
   cancelCard(): void {
     this.router.navigate(['/cards']);
+  }
+
+  onFileSelected(event) {
+
+    this.file = event.target.files[0];
+
+    if (this.file) {
+
+        this.card.local = this.file.name;
+    }
   }
 
 }

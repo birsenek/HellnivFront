@@ -48,9 +48,19 @@ export class CardService {
     return this.httpRequest.get<Card>(url)
   }
 
-  update(card: Card): Observable<Card> {
+  update(card: Card, file: File): Observable<Card> {
+    const formData: FormData = new FormData();
+    formData.append('imageFile', file, file.name);
+    formData.append('nome', card.nome);
+    formData.append('elemento', card.elemento);
+    formData.append('tipo', card.tipo);
+    formData.append('poderFogo', card.poderFogo.toString());
+    formData.append('poderAgua', card.poderAgua.toString());
+    formData.append('poderAr', card.poderAr.toString());
+    formData.append('poderTerra', card.poderTerra.toString());
+    formData.append('local', card.local);
     const url = `${this.baseUrl}/${card.id}`
-    return this.httpRequest.put<Card>(url, card)
+    return this.httpRequest.put<Card>(url, formData)
   }
 
   delete(cardId: number): Observable<Card> {

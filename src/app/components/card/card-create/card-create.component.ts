@@ -38,7 +38,6 @@ export class CardCreateComponent implements OnInit {
       this.cardService.showMessage("Carta criada com sucesso!")
       this.router.navigate(['/cards'])
     })
-    // this.cardService.uploadFile(this.file).subscribe(() => {})
   }
 
   cancelCard(): void {
@@ -51,18 +50,8 @@ export class CardCreateComponent implements OnInit {
     this.file = event.target.files[0];
 
     if (this.file) {
-
         this.card.local = this.file.name;
     }
-
-        //const formData = new FormData();
-
-        //formData.append("thumbnail", this.file);
-        //this.cardService.uploadFile(this.file).subscribe(() => {})
-        //this.cardService.uploadFile(file).subscribe(() => {})
-       //const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-    //     upload$.subscribe();
-    }
+  }
 
 }
