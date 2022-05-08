@@ -12,7 +12,7 @@ export class CardCrudComponent implements OnInit {
   constructor(private router: Router,
     private headerService : HeaderService) { 
     headerService.headerData = {
-      title: 'Cadastro de Cartas',
+      title: 'Cartas',
       icon: 'videogame_asset',
       routeUrl: '/cards'
     }

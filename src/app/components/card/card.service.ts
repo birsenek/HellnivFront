@@ -67,12 +67,4 @@ export class CardService {
     const url = `${this.baseUrl}/${cardId}`
     return this.httpRequest.delete<Card>(url)
   }
-
-  // uploadFile(file: File) {
-  //   const formData: FormData = new FormData();
-  //   const url = `${this.baseUrl}/upload`
-  //   formData.append('fileKey', file, file.name);
-  //   return this.httpRequest.post(url, formData);
-  // }
-
 }

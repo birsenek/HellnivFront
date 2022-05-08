@@ -35,7 +35,8 @@ import { CardDeleteComponent } from './components/card/card-delete/card-delete.c
 import { UserCrudComponent } from './views/user-crud/user-crud.component';
 import { UserReadComponent } from './components/user/user-read/user-read.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
-import {CdkAccordionModule} from '@angular/cdk/accordion'
+import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { LoginComponent } from './components/user/login/login.component'
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import {CdkAccordionModule} from '@angular/cdk/accordion'
     CardDeleteComponent,
     UserCrudComponent,
     UserReadComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
