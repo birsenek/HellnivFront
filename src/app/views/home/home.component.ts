@@ -1,5 +1,7 @@
 import { HeaderService } from './../../components/template/header/header.service';
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { tokenGetter } from 'src/app/app.module';
 
 @Component({
   selector: 'Helniv-home',
@@ -8,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) { 
+  user = {
+    user : "teste"
+  }
+
+  constructor(private headerService: HeaderService,
+    private jwtHelper: JwtHelperService) { 
     headerService.headerData = {
       title: 'Início',
       icon: 'home',
@@ -16,6 +23,26 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  isUserAuthenticated = (): boolean => {
+    const token = tokenGetter();
+    
+    if (token)
+    {
+     console.log(this.jwtHelper.decodeToken(token));
+     const decodedToken = this.jwtHelper.decodeToken(token);
+     this.user.user = decodedToken.name;
+      return true; 
+    }
+    else
+    {
+      return false;    
+    }
+  }
+
+  logOut = () => {
+    localStorage.removeItem("jwt");
+  }
+  
   ngOnInit(): void {
   }
 

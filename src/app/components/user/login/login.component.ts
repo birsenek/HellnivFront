@@ -3,6 +3,8 @@ import { HeaderService } from './../../template/header/header.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Login } from '../login.model';
+import { AuthenticatedResponse } from '../authenticated-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'Helniv-login',
@@ -10,8 +12,10 @@ import { Login } from '../login.model';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
+  invalidLogin: boolean;
 
-  login: Login = {
+  credentials: Login = {
     login: "",
     password: ""
   };
@@ -32,10 +36,17 @@ export class LoginComponent implements OnInit {
 
   userLogin() : void
   {   
-    this.userService.userLogin(this.login).subscribe(() => {
-      this.userService.showMessage('Usuário conectado com sucesso');
-      this.router.navigate(["/"]);
+    this.userService.userLogin(this.credentials).subscribe({
+      next: (response: AuthenticatedResponse) => {
+        const token = response.token;
+        localStorage.setItem("jwt", token);
+        this.invalidLogin = false;
+        this.userService.showMessage("Usuário conectado com sucesso!");
+        this.router.navigate(["/"]);
+      },
+      error: (err: HttpErrorResponse) => this.invalidLogin = true
     })
+    
   }
 
 }

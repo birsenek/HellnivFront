@@ -35,9 +35,13 @@ import { CardDeleteComponent } from './components/card/card-delete/card-delete.c
 import { UserCrudComponent } from './views/user-crud/user-crud.component';
 import { UserReadComponent } from './components/user/user-read/user-read.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
-import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { LoginComponent } from './components/user/login/login.component'
+import { JwtModule } from '@auth0/angular-jwt';
 
+export function tokenGetter() {
+  return localStorage.getItem("jwt");
+} 
 
 @NgModule({
   declarations: [
@@ -73,7 +77,14 @@ import { LoginComponent } from './components/user/login/login.component'
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:7111", "localhost:4200"],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

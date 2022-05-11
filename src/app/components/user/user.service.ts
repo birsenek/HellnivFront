@@ -1,3 +1,4 @@
+import { AuthenticatedResponse } from './authenticated-response.model';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from "@angular/core";
@@ -35,7 +36,7 @@ export class UserService {
         return this.httpRequest.post<User>(this.baseUrl, user);
     }
 
-    userLogin(login: Login): Observable<Login> {
+    userLogin(login: Login): Observable<AuthenticatedResponse> {
       const url = `${this.baseUrl}/login`
       return this.httpRequest.post<Login>(url, login)
         .pipe(
