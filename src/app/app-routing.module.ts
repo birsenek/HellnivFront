@@ -1,3 +1,4 @@
+import { AuthGuard } from './components/guards/auth.guard';
 import { LoginComponent } from './components/user/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,23 +24,28 @@ const routes: Routes = [
   },
   {
     path:"cards/create",
-    component: CardCreateComponent
+    component: CardCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"cards/update/:id",
-    component: CardUpdateComponent
+    component: CardUpdateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"cards/delete/:id",
-    component: CardDeleteComponent
+    component: CardDeleteComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: "users",
-    component: UserCrudComponent
+    component: UserCrudComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"users/create",
-    component: UserCreateComponent
+    component: UserCreateComponent,
+    canActivate: [AuthGuard]
   },
   {
     path:"users/login",

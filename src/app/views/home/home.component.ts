@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   isUserAuthenticated = (): boolean => {
     const token = tokenGetter();
     
-    if (token)
+    if (token && !this.jwtHelper.isTokenExpired(token)) 
     {
      console.log(this.jwtHelper.decodeToken(token));
      const decodedToken = this.jwtHelper.decodeToken(token);

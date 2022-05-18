@@ -1,5 +1,5 @@
 import { AuthenticatedResponse } from './authenticated-response.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, EMPTY, map, Observable } from 'rxjs';
@@ -38,7 +38,9 @@ export class UserService {
 
     userLogin(login: Login): Observable<AuthenticatedResponse> {
       const url = `${this.baseUrl}/login`
-      return this.httpRequest.post<Login>(url, login)
+      return this.httpRequest.post<Login>(url, login, {
+        headers: new HttpHeaders({ "Content-Type": "application/json"})
+      })
         .pipe(
           map((obj) => obj),
           catchError(e => this.errorHandler(e))
