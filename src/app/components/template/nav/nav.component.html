@@ -8,8 +8,8 @@
                 </i>
                 Inicio
              </a>
-             <cdk-accordion class="example-accordion">
-                <cdk-accordion-item
+             <cdk-accordion class="example-accordion" *ngIf="isUserAuthenticated()">
+                <cdk-accordion-item 
                   *ngFor="let item of items; let index = index;"
                   #accordionItem="cdkAccordionItem"
                   class="example-accordion-item"

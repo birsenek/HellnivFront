@@ -1,7 +1,7 @@
 <mat-toolbar class="header mat-elevation-z4"> 
     <div class="header">
         <span>
-            <a class="links">
+            <a class="links" routerLink="/">
                 <img src="assets/img/logo.png" alt="logo" class="logo">
             </a>
         </span>
@@ -14,11 +14,16 @@
             </a>
         </span>
     </div>
-    
-    <a mat-button routerLink="/users/login" class="login-menu">
-        <i class="material-icons">
-            account_circle
-        </i>
-        Login
-    </a>
+    <div *ngIf="isUserAuthenticated()" class="authenticated-menu"> 
+        Bem Vindo {{user.user}}
+        <button (click)="logOut()">Logout</button>
+    </div>
+    <div *ngIf="!isUserAuthenticated()">
+        <a mat-button routerLink="/users/login" class="login-menu">
+            <i class="material-icons">
+                account_circle
+            </i>
+            Login
+        </a>
+    </div>
 </mat-toolbar>

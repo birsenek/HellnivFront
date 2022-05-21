@@ -89,6 +89,7 @@ export class UserReadDataSource extends DataSource<User> {
         case 'name': return compare(a.nome, b.nome, isAsc);
         case 'login' : return compare(a.login, b.login, isAsc);
         case 'email' : return compare(a.email, b.email, isAsc);
+        case 'role' : return compare(a.role, b.role, isAsc);
         case 'ativo' : return compare(a.ativo, b.ativo, isAsc);
         default: return 0;
       }

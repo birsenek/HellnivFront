@@ -19,7 +19,7 @@ export class UserReadComponent implements AfterViewInit {
   
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['rowNumber', 'name', 'login', 'email', 'ativo'];
+  displayedColumns = ['rowNumber', 'name', 'login', 'role' ,'email', 'ativo'];
 
   constructor(private userService: UserService) {
     this.dataSource = new UserReadDataSource(userService);

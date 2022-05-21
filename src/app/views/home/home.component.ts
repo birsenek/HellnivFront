@@ -11,7 +11,7 @@ import { tokenGetter } from 'src/app/app.module';
 export class HomeComponent implements OnInit {
 
   user = {
-    user : "teste"
+    user : ""
   }
 
   constructor(private headerService: HeaderService,

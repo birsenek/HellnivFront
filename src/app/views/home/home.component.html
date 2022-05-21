@@ -1,15 +1,8 @@
 <mat-card class="home mat-elevation-z3">
     <mat-card-title class="title">
-        Bem Vindo!
-        <br>
-<div *ngIf="isUserAuthenticated()" style="color:blue;">
-  <h2>
-    YOU ARE LOGGED IN! {{user.user}}
-  </h2>
-  <button (click)="logOut()">Logout</button>
-</div>
-    </mat-card-title>
-    <mat-card-subtitle class="subtitle">
+      Bem Vindo<span *ngIf="isUserAuthenticated()"> {{user.user}}</span>!
+      </mat-card-title>
+      <mat-card-subtitle class="subtitle">
         Sistema para cadastro de Cartas Helniv.
-    </mat-card-subtitle>
+      </mat-card-subtitle>
 </mat-card>

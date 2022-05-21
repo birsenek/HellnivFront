@@ -21,3 +21,15 @@
 .header .title-group i {
     padding-right: 5px;
 }
+
+.authenticated-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 12%;
+}
+
+.authenticated-menu button {
+    border-radius: 15%;
+    padding: 10px 5px 10px 5px;
+}

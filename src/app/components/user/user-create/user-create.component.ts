@@ -15,6 +15,7 @@ export class UserCreateComponent implements OnInit {
     id: "0",
     nome: "",
     login: "",
+    role: "",
     password: "",
     email: "",
     ativo: ""

@@ -1,5 +1,8 @@
+import { Router } from '@angular/router';
 import { HeaderService } from './header.service';
 import { Component, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { tokenGetter } from 'src/app/app.module';
 
 @Component({
   selector: 'Helniv-header',
@@ -8,7 +11,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private headerService: HeaderService) { }
+  user = {
+    user : ""
+  }
+
+  constructor(private headerService: HeaderService,
+    private jwtHelper: JwtHelperService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +32,27 @@ export class HeaderComponent implements OnInit {
 
   get routeUrl(): string {
     return this.headerService.headerData.routeUrl
+  }
+
+  isUserAuthenticated = (): boolean => {
+    const token = tokenGetter();
+    
+    if (token && !this.jwtHelper.isTokenExpired(token)) 
+    {
+     console.log(this.jwtHelper.decodeToken(token));
+     const decodedToken = this.jwtHelper.decodeToken(token);
+     this.user.user = decodedToken.name;
+      return true; 
+    }
+    else
+    {
+      return false;    
+    }
+  }
+
+  logOut = () => {
+    localStorage.removeItem("jwt");
+    this.router.navigate(["/"]);
   }
 
 }
