@@ -16,10 +16,10 @@
     </div>
     <div *ngIf="isUserAuthenticated()" class="authenticated-menu"> 
         Bem Vindo {{user.user}}
-        <button (click)="logOut()">Logout</button>
+        <button mat-raised-button color="warn" (click)="logOut()">Logout</button>
     </div>
     <div *ngIf="!isUserAuthenticated()">
-        <a mat-button routerLink="/users/login" class="login-menu">
+        <a mat-raised-button color="primary" routerLink="/users/login" class="login-menu">
             <i class="material-icons">
                 account_circle
             </i>

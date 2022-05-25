@@ -33,7 +33,10 @@ export class UserService {
     }
 
     createUser(user: User): Observable<User> {
-        return this.httpRequest.post<User>(this.baseUrl, user);
+        return this.httpRequest.post<User>(this.baseUrl, user)
+        .pipe(
+          catchError(e => this.errorHandler(e))
+        );
     }
 
     userLogin(login: Login): Observable<AuthenticatedResponse> {
@@ -48,7 +51,21 @@ export class UserService {
     }
 
     errorHandler(e: any): Observable<any>{
-      this.showMessage("Erro ao logar. Verifique sua senha.", true);
+      switch (e.status)
+      {
+        case 403:
+          this.showMessage("Acesso não autorizado. Verifique suas permissões de perfil.", true);
+          break;
+        case 400:
+          this.showMessage("Dados inválidos. Por gentilza verificar as informações inseridas.", true)
+          break;
+        default:
+          this.showMessage("Erro ao logar. Verifique sua senha.", true);
+          break;
+      }
+      
+      
+        
       return EMPTY;
     }
 

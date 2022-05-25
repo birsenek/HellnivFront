@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
   user = {
     user : ""
   }
-
+  
   constructor(private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
